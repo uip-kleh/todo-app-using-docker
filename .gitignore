@@ -1,0 +1,22 @@
+# 1. データベースのデータ（絶対にGitに上げてはいけない）
+db/data/
+
+# 2. 依存ライブラリ（容量が大きく、Docker内で自動インストールされるため不要）
+app/node_modules/
+
+# 3. 環境変数・秘密情報（パスワードやAPIキーの流出を防ぐ）
+.env
+.env.local
+.env.*.local
+
+# 4. OSやエディタの自動生成ファイル（チーム開発での競合を防ぐ）
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# 5. ログファイル（エラーログなどは不要）
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*

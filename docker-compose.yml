@@ -1,0 +1,28 @@
+version: '3.8'
+
+services:
+  # Webアプリケーション側
+  app:
+    build: ./app
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./app:/usr/src/app
+      - /usr/src/app/node_modules
+    environment:
+      - DATABASE_URL=postgres://postgres:password@db:5432/todo_db
+    depends_on:
+      - db
+
+  # データベース側
+  db:
+    image: postgres:16-alpine
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_DB=todo_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./db/data:/var/lib/postgresql/data
+      - ./db/init:/docker-entrypoint-initdb.d
